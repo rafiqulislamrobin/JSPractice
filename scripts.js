@@ -3,10 +3,13 @@ const quoteText = document.getElementById('quote');
 const quoteAuthor = document.getElementById('author');
 const twitterBtn = document.getElementById('twitter');
 const newQuoteBtn = document.getElementById('new-quote');
+const loader = document.getElementById('loader');
 
 let quotes =[];
+
 //Get Random Quote
 function randomQuote(){
+  loading();
  const quote = quotes[Math.floor(Math.random() *quotes.length)];
  console.log(quote);
       if(!quote.author)
@@ -26,19 +29,23 @@ function randomQuote(){
         quoteText.classList.remove('long-quote');
       }
  quoteText.textContent =quote.text;
- 
+ complete();
 }
+
 //tweet quote
 function tweetQuote() {
   const tweetUrl =`https://twitter.com/intent/tweet?text=${quoteText.textContent} - ${quoteAuthor.textContent}`;
   window.open(tweetUrl, '_blank');
 }
+
 //Event listner
 newQuoteBtn.addEventListener('click', randomQuote);
 twitterBtn.addEventListener('click', tweetQuote);
+
 //Get Quotes from Api
 async function GetQuotes()
 {
+  loading();
   const ApiUrl = 'https://type.fit/api/quotes';
   try{
   const response = await fetch(ApiUrl);
@@ -49,6 +56,18 @@ async function GetQuotes()
   {
       alert(error)
   }
+}
+
+//load on
+function loading() {
+  quoteContainer.hidden = true;
+  loader.hidden = false;
+}
+
+//load off
+function complete() {
+  quoteContainer.hidden = false;
+  loader.hidden = true;
 }
 
 //On load
