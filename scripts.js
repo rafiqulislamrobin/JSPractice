@@ -54,7 +54,7 @@ async function GetQuotes()
   }
   catch(error)
   {
-      alert(error)
+      console.log(error);
   }
 }
 
