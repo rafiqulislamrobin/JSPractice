@@ -9,7 +9,7 @@ let quotes =[];
 
 //Get Random Quote
 function randomQuote(){
-  loading();
+  ShowLoading();
  const quote = quotes[Math.floor(Math.random() *quotes.length)];
  console.log(quote);
       if(!quote.author)
@@ -45,7 +45,7 @@ twitterBtn.addEventListener('click', tweetQuote);
 //Get Quotes from Api
 async function GetQuotes()
 {
-  loading();
+  ShowLoading();
   const ApiUrl = 'https://type.fit/api/quotes';
   try{
   const response = await fetch(ApiUrl);
