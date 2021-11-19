@@ -29,7 +29,7 @@ function randomQuote(){
         quoteText.classList.remove('long-quote');
       }
  quoteText.textContent =quote.text;
- complete();
+ hideLoading();
 }
 
 //tweet quote
@@ -55,17 +55,18 @@ async function GetQuotes()
   catch(error)
   {
       console.log(error);
+      GetQuotes();
   }
 }
 
 //load on
-function loading() {
+function ShowLoading() {
   quoteContainer.hidden = true;
   loader.hidden = false;
 }
 
 //load off
-function complete() {
+function hideLoading() {
   quoteContainer.hidden = false;
   loader.hidden = true;
 }
